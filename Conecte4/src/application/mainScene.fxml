@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainSceneController">
+   <children>
+      <AnchorPane>
+         <children>
+            <ImageView fitHeight="540.0" fitWidth="960.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../res/background.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="error" layoutX="158.0" layoutY="46.0" prefHeight="449.0" prefWidth="645.0" visible="false">
+         <children>
+            <ImageView fitHeight="293.0" fitWidth="415.0" layoutX="117.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../res/erro.png" />
+               </image>
+            </ImageView>
+            <TextArea fx:id="erroTXT" blendMode="HARD_LIGHT" layoutX="137.0" layoutY="157.0" prefHeight="200.0" prefWidth="376.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="loginScreen" layoutX="140.0" layoutY="46.0" prefHeight="449.0" prefWidth="645.0">
+         <children>
+            <ImageView fitHeight="210.0" fitWidth="212.0" layoutX="232.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../res/login.png" />
+               </image>
+            </ImageView>
+            <Button defaultButton="true" layoutX="297.0" layoutY="272.0" mnemonicParsing="false" onAction="#buttonPlay" opacity="0.0" prefHeight="47.0" prefWidth="52.0" />
+            <Label fx:id="labelIp" layoutX="258.0" layoutY="200.0" prefHeight="21.0" prefWidth="129.0" textAlignment="CENTER" textFill="WHITE" />
+            <Label fx:id="labelUsername" layoutX="258.0" layoutY="248.0" prefHeight="21.0" prefWidth="129.0" textAlignment="CENTER" textFill="WHITE" />
+            <TextField fx:id="ipField" layoutX="255.0" layoutY="197.0" onKeyTyped="#ipUpdate" opacity="0.0" prefHeight="27.0" prefWidth="137.0" />
+            <TextField fx:id="username" layoutX="255.0" layoutY="245.0" onKeyTyped="#usernameUpdate" opacity="0.0" prefHeight="27.0" prefWidth="137.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="ipAdd" prefHeight="540.0" prefWidth="960.0" visible="false">
+         <children>
+            <Label fx:id="progressing" layoutX="361.0" layoutY="120.0" prefHeight="84.0" prefWidth="239.0" textAlignment="CENTER" textFill="WHITE" />
+            <ProgressIndicator blendMode="ADD" layoutX="454.0" layoutY="244.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="canvasAnchor" layoutX="39.0" layoutY="36.0" visible="false">
+         <children>
+            <ImageView fitHeight="34.0" fitWidth="200.0" layoutX="342.0">
+               <image>
+                  <Image url="@../../res/moves.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="moveseste" layoutX="358.0" layoutY="9.0" text="0" textFill="WHITE" />
+            <Label fx:id="movesoutro" layoutX="516.0" layoutY="9.0" text="0" textFill="WHITE" />
+            <ImageView fx:id="estebutton" fitHeight="150.0" fitWidth="150.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="outrobutton" fitHeight="150.0" fitWidth="150.0" layoutX="734.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="leftbulb" fitHeight="34.0" fitWidth="34.0" layoutX="180.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="rightbulb" fitHeight="34.0" fitWidth="34.0" layoutX="670.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" />
+            <Canvas fx:id="canvasArea" height="420.0" layoutX="197.0" layoutY="50.0" onMouseClicked="#canvasMouseClicked" width="490.0" />
+            <ImageView fitHeight="52.0" fitWidth="150.0" layoutY="93.0" preserveRatio="true">
+               <image>
+                  <Image url="@../../res/nameplate.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="52.0" fitWidth="150.0" layoutX="734.0" layoutY="93.0" preserveRatio="true">
+               <image>
+                  <Image url="@../../res/nameplate.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="nomeeste" layoutX="37.0" layoutY="104.0" prefHeight="17.0" prefWidth="70.0" style="-fx-alignment: center;" text="Label" textAlignment="CENTER" textFill="WHITE" />
+            <Label fx:id="nomeoutro" layoutX="771.0" layoutY="104.0" prefHeight="17.0" prefWidth="70.0" style="-fx-alignment: center;" text="Label" textAlignment="CENTER" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="926.0">
+         <children>
+            <ImageView fitHeight="40.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../res/close.png" />
+               </image>
+            </ImageView>
+            <Button blendMode="MULTIPLY" mnemonicParsing="false" onAction="#buttonClose" prefHeight="34.0" prefWidth="34.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="endGame" layoutX="380.0" layoutY="181.0" visible="false">
+         <children>
+            <ImageView fx:id="won" fitHeight="180.0" fitWidth="200.0" layoutX="1.0" visible="false">
+               <image>
+                  <Image url="@../../res/won.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="lost" fitHeight="180.0" fitWidth="200.0" visible="false">
+               <image>
+                  <Image url="@../../res/lost.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="tie" fitHeight="180.0" fitWidth="200.0" layoutX="10.0" layoutY="10.0" visible="false">
+               <image>
+                  <Image url="@../../res/tie.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="moves" layoutX="83.0" layoutY="64.0" text="Label" textFill="WHITE" />
+            <Label fx:id="time" layoutX="69.0" layoutY="81.0" text="Label" textFill="WHITE" />
+            <Button layoutX="20.0" layoutY="102.0" mnemonicParsing="false" onAction="#buttonRestart" opacity="0.0" prefHeight="61.0" prefWidth="161.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
