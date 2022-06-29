@@ -17,7 +17,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import multiplayer.Jogador;
-import multiplayer.MultiplayerUtil;
 
 public class MainSceneController {
 
