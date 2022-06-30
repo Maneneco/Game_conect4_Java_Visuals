@@ -11,7 +11,7 @@ public class Coin {	//classe que representa uma das moedas do jogo.
 	private double velY = 0;	//uma velocidade em y, usada na animacao
 	private double graV = 10;	//a gravidade da animacao
 	private double finY;	//a posicao alvo em y
-	
+	 
 	public Coin(GraphicsContext gc, double posX, double posY, double finY, double width, double height, Jogador jogador) {
 		this.gc = gc;
 		this.posX = posX * width;
