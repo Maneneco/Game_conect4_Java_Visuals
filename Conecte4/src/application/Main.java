@@ -31,8 +31,6 @@ public class Main extends Application {	//classe principal gerada pelo javafx
 			scale.setPivotY(0);
 			scene.getRoot().getTransforms().setAll(scale); //aplica a escala aos transforms da cena raiz.
 			
-			// 
-			
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {	//ao fechar a aplicação
 				
 				@Override
