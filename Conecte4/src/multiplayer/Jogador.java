@@ -21,7 +21,7 @@ public class Jogador {	//jogador
 			e.printStackTrace();
 		}
 	}
-
+   
 	//Getter para o nome
 	public String getName() {
 		return name;
