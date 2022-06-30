@@ -28,8 +28,8 @@ public class Coin {	//classe que representa uma das moedas do jogo.
 		velY+=graV;
 		if(velY<2.5) return;	//garantia para que não ocorra nada apos a alteracao da velocidade acima.
 		posY += velY;	//se nao, a pos e aumentada pela velocidade
-		if(posY>=finY) { //se a posicao for maior ou igual ao alvo, ou seja, se chegar ao alvo ou passar dele em uma das atualizacoes
-			posY = finY;	//a posicao sera reiniciada para o alvo para impedir que esta apareca seguindo oela moeda de baixo.
+		if(posY>=finY) { //se a posicao for maior ou igual ao alvo, ou seja, se chegar ao alvo ou passar por ele numa das atualizacoes
+			posY = finY;	//a posicao sera reiniciada para o alvo para impedir que esta apareca seguindo pela moeda de baixo.
 			velY*=-0.2;	//e a sua velocidade e invertida, para que a moeda tenha a reacao de queda. assim como também é diminuida, para que não leve tanto tempo a acabar a animação.
 		}
 	}
