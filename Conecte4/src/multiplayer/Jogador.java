@@ -21,40 +21,4 @@ public class Jogador {
 			e.printStackTrace();
 		}
 	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getMoves() {
-		return moves;
-	}
-
-	public void setMoves(int moves) {
-		this.moves = moves;
-	}
-
-	public Image getCoin() {
-		return coin;
-	}
-
-	public void setCoin(Image coin) {
-		this.coin = coin;
-	}
-
-	public int getCode() {
-		return code;
-	}
-
-	public void setCode(int code) {
-		this.code = code;
-	}
-
-	public void addMove() {
-		moves++;
-	}
 }
