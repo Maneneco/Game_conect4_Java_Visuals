@@ -12,7 +12,27 @@ public class MultiplayerUtil {
 	private String dadosRecebidos = ""; 
 	private String dadosAEnviar = ""; 
 	
-	public MultiplayerUtil() {// Construtor
-		
+	public MultiplayerUtil(String ip, String username, Boolean exited) throws IOException, UnknownHostException {
+		if(ip.isEmpty()) {	
+			
+		} else {	
+			
+			String dados=null; 
+			while(dados==null) { 
+
+			}
+			
+
+		}
+		this.exited = exited;	
+		dadosRecebidos = "";
+	}
+	
+	public Jogador getJogadorAtual() {	
+		return atual;
+	}
+	
+	public void enviarDados(String dados) {	
+		this.dadosAEnviar = dados;
 	}
 }
