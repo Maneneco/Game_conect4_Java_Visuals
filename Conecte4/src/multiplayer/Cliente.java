@@ -40,4 +40,5 @@ public class Cliente {	//o socket do cliente
 			e.printStackTrace();
 		}
 	}
+    
 }
