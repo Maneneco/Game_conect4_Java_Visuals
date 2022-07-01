@@ -32,4 +32,16 @@ public class Servidor {	//servidor de conexao
 		return "#"; //se nao, retorna um sinal de que nao há dados.
 	}
 	
+	public void encerra() { //encerra os buffers, e os sockets
+		try {
+			entrada.close();
+			saida.close();
+			client.close();
+			server.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }
