@@ -45,6 +45,7 @@ public class Game extends Thread{	//o jogo extende a thread, para que possa cont
 		}
 		drawGrid();	//desenha o tabuleiro
 	}
+	
 	public void drawGrid() {	//funcao que desenha o tabuleiro
 		gc.clearRect(0, 0, width, height);	//limpa qualquer residuo de outros frames
 		for(Coin[] cr: coins) {	//para cada linha do tabuleiro
