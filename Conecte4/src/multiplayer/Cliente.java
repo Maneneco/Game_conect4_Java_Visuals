@@ -23,4 +23,21 @@ public class Cliente {	//o socket do cliente
 		saida.println(dados);
 	}
 	
+	public String recebeDados() { 	//para receber os dados
+		if(entrada.hasNextLine()) { //é verificado se há uma nova entrada de dados.
+			return entrada.nextLine(); //se houver, retorna os dados.
+		}
+		return "#";	//se nao, retorna # como simbolo de que nao há nada.
+	}
+
+	public void encerra() { //funcao que encerra os buffers e depois o socket.
+		try {
+			client.close();
+			entrada.close();
+			saida.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
