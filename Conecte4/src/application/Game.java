@@ -45,3 +45,15 @@ public class Game extends Thread{	//o jogo extende a thread, para que possa cont
 		}
 		drawGrid();	//desenha o tabuleiro
 	}
+	public void drawGrid() {	//funcao que desenha o tabuleiro
+		gc.clearRect(0, 0, width, height);	//limpa qualquer residuo de outros frames
+		for(Coin[] cr: coins) {	//para cada linha do tabuleiro
+			for(Coin c: cr) { //para cada moeda na linha atual
+				if(c==null) continue; //se a moeda for nula pula para a proxima posição.
+				c.update();	//atualiza os valores da posicao
+				c.show();	//desenha a moeda no canvas.
+			}
+		}
+		gc.drawImage(grid, 0, 0, width, height);	//desenha o tabuleiro por cima das moedas
+	}
+}
