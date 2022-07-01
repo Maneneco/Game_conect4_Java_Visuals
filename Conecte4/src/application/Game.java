@@ -45,3 +45,4 @@ public class Game extends Thread{	//o jogo extende a thread, para que possa cont
 		}
 		drawGrid();	//desenha o tabuleiro
 	}
+}
