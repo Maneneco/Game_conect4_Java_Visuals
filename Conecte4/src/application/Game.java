@@ -57,4 +57,54 @@ public class Game extends Thread{	//o jogo extende a thread, para que possa cont
 		}
 		gc.drawImage(grid, 0, 0, width, height);	//desenha o tabuleiro por cima das moedas
 	}
+
+	public boolean addCoin(int x, int y_) {	//adiciona uma moeda na posicao (x.y_)
+		int y;	//posicao y temporaria para verificacao
+		
+		if(coins[x][0]!=null) return false; //se ja houver uma moeda no local clicado retorna falso
+		for(y=lins-1;y>0;y--) {	//passa de baixo para cima na coluna procurando o primeiro local livre.
+			if(coins[x][y]==null)break; //ao encontrar um espaco livre sai do loop.
+		}
+		Coin c = new Coin(gc, x, 0, y,cellWidth, cellHeight, multiplayer.getJogadorAtual());	//cria uma moeda na posicao x y_, com alvo y.
+		coins[x][y] = c;	//guarda a moeda no grid
+		last[0] = x; //guarda a ultima posicao
+		last[1] = y;
+		return true; //retorna verdadeiro porque adicionou uma moeda
+	}
+
+	public Jogador update() { //atualiza o jogo
+		if(multiplayer.taNaVez()) { //se tiver na vez do jogador local
+			String dados = multiplayer.recebeDados(); // tenta receber dados
+			if(dados!=null) { //se tiver recebido algum dado
+				if(dados.contains("exit")) return multiplayer.getEste(); //testa para ver se foi uma desistencia, se sim, retorna o jogador local
+				else if (dados.contains(multiplayer.getAdv().getName())) return multiplayer.getAdv(); //se nao, testa para ver se há o nome do jogador remoto, se sim, retorna.
+			}
+			if(!click.isEmpty()) { //se o click nao estiver vazio
+				int dad = (int)(click.getX()/cellWidth); // guarda o click de forma tratada para que se traduza as linhas e colunas do grid
+				int dos = (int)(click.getY()/cellHeight);
+				if (coins[dad][dos]!=null) return null;  //se a posicao clicada for vazia, retorna null (nao faz jogada alguma);
+				addCoin(dad,dos);	//se nao, adiciona uma moeda à posição
+				multiplayer.enviarDados(dad+" "+dos); //envia a posicao da moeda ao jogador remoto
+				click.reset(); //limpa o click
+				Jogador v = verificaFim(); //verifica se o jogo terminou, recebendo o jogador que deve ter vencido o jogo.
+				multiplayer.addMove(); //adiciona um movimento ao jogador atual
+				if (v!=null) return v; //se o jogo terminou, retorna o jogador vencedor
+				multiplayer.mudaJogador();	//se o jogo nao terminou, passa a vez
+			}
+		} else {	//se nao for a vez do jogador local, 
+			String dados = multiplayer.recebeDados(); 	//recebe dados
+			if(dados!=null) {	//se os dados nao forem nulos
+				if(dados.contains("exit")) return multiplayer.getEste(); //retorna o jogador local, em caso de desistencia do remoto
+				else if (dados.contains(multiplayer.getAdv().getName())) return multiplayer.getAdv(); //ou o jogador remoto caso este tenha ganhado.
+				
+				int dad = (int)Double.parseDouble(dados.split(" ")[0]);	//divide os dados recebidos em duas variaveis
+				int dos = (int)Double.parseDouble(dados.split(" ")[1]);
+				
+				addCoin(dad,dos);	//adiciona a moeda no local indicado.
+				multiplayer.addMove();	//adiciona o movimento do jogador
+				multiplayer.mudaJogador(); //e passa a vez.
+			}
+		}
+		return null;	//se o jogo ainda nao terminou, retorna nulo
+	}
 }
