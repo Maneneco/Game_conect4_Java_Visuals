@@ -57,7 +57,7 @@ public class Game extends Thread{	//o jogo extende a thread, para que possa cont
 		}
 		gc.drawImage(grid, 0, 0, width, height);	//desenha o tabuleiro por cima das moedas
 	}
-
+	
 	public boolean addCoin(int x, int y_) {	//adiciona uma moeda na posicao (x.y_)
 		int y;	//posicao y temporaria para verificacao
 		
@@ -71,7 +71,7 @@ public class Game extends Thread{	//o jogo extende a thread, para que possa cont
 		last[1] = y;
 		return true; //retorna verdadeiro porque adicionou uma moeda
 	}
-
+	
 	public Jogador update() { //atualiza o jogo
 		if(multiplayer.taNaVez()) { //se tiver na vez do jogador local
 			String dados = multiplayer.recebeDados(); // tenta receber dados
@@ -106,5 +106,96 @@ public class Game extends Thread{	//o jogo extende a thread, para que possa cont
 			}
 		}
 		return null;	//se o jogo ainda nao terminou, retorna nulo
+	}
+
+	public Jogador verificaFim() {	//verificando se o jogo terminou
+		int count = 1;	//verifica horizontal	estes contadores contam quantas peças do jogador remoto estão alinhadas a partir da ultima moeda adicionada.
+		
+		for(int x=1;x<4;x++) {	//conta horizontalmente a partir da moeda atual
+			if(last[0]-x<0) break;
+			else if(coins[last[0]-x][last[1]]==null) break;	//se achar outra moeda numa distancia de até 3 moeda, não é possivel que tenha vencido, logo sai do loop.
+			else if (coins[last[0]-x][last[1]].getJogador()==multiplayer.getEste()) {
+				 count++;
+			}
+		}
+		for(int x=1;x<4;x++) {	//faz a mesma coisa para o outro lado.
+			if(last[0]+x>=cols) break;
+			else if(coins[last[0]+x][last[1]]==null) break;
+			else if (coins[last[0]+x][last[1]].getJogador()==multiplayer.getEste()){
+				 count++;
+			}
+		}
+		if(count == 4) return multiplayer.getEste();	//se o contador chega a 4. o jogador local venceu, e é retornado.
+		
+		count = 1;	//verifica vertical	//faz o mesmo que o acima, porém verticalmente.
+
+		for(int y=1;y<4;y++) {
+			if(last[1]-y<0) break;
+			else if(coins[last[0]][last[1]-y]==null) break;
+			else if (coins[last[0]][last[1]-y].getJogador()==multiplayer.getEste()){
+				 count++;
+			}
+		}
+		for(int y=1;y<4;y++) {
+			if(last[1]+y>=lins) break;
+			else if(coins[last[0]][last[1]+y]==null) break;
+			else if (coins[last[0]][last[1]+y].getJogador()==multiplayer.getEste()){
+				 count++;
+			}
+		}
+		if(count == 4) return multiplayer.getEste();
+		
+		count = 1; //diagonal desc	//faz a mesma coisa que os acima, porem o index altera tanto x quanto y, movendo-se diagonalmente de forma descendente.
+		
+		for(int xy=1;xy<4;xy++) {
+			if(last[0]-xy<0||last[1]-xy<0) break;
+			else if(coins[last[0]-xy][last[1]-xy]==null) break;
+			else if (coins[last[0]-xy][last[1]-xy].getJogador()==multiplayer.getEste()){
+				 count++;
+			}
+		}
+		for(int xy=1;xy<4;xy++) {
+			if(last[0]+xy>=cols||last[1]+xy>=lins) break;
+			else if(coins[last[0]+xy][last[1]+xy]==null) break;
+			else if (coins[last[0]+xy][last[1]+xy].getJogador()==multiplayer.getEste()){
+				 count++;
+			}
+		}
+		if(count == 4) return multiplayer.getEste();
+		
+		count = 1; //diagonal asc	//faz quase o mesmo do acima, porém o index y é invertido, movendo-se de forma ascedente.
+		
+		for(int xy=1;xy<4;xy++) {
+			if(last[0]-xy<0||last[1]+xy>=lins) break;
+			else if(coins[last[0]-xy][last[1]+xy]==null) break;
+			else if (coins[last[0]-xy][last[1]+xy].getJogador()==multiplayer.getEste()){
+				 count++;
+			}
+		}
+		for(int xy=1;xy<4;xy++) {
+			if(last[0]+xy>=cols||last[1]-xy<0) break;
+			else if(coins[last[0]+xy][last[1]-xy]==null) break;
+			else if (coins[last[0]+xy][last[1]-xy].getJogador()==multiplayer.getEste()){
+				 count++;
+			}
+		}
+		if(count == 4) return multiplayer.getEste();
+		
+		return null;
+	}
+
+	public void setClick(double x, double y) {	//adiciona um clique ao jogador atual.
+		if(multiplayer.taNaVez()) {	//apenas se for a vez dele.
+			click.set(x, y);
+		}
+	}
+
+	public boolean verificaEmpate() {	//verifica a condição de empate do jogo.
+		for(Coin[] cr: coins) {	//a cada linha do grid
+			for(Coin c: cr) { //a cada moeda da linha
+				if(c==null) return false; // se houver um espaço vazio, ainda não é considerado empate.
+			}
+		}
+		return true; 	//só é empate caso não haja mais espaços vazios.
 	}
 }
