@@ -21,5 +21,15 @@ public class Servidor {	//servidor de conexao
 		saida = new PrintStream(client.getOutputStream());
 	}
 	
+	public void enviarDados(String dados) { //envia os dados via o buffer do socket de cliente
+		saida.println(dados);
+	}
+	
+	public String recebeDados() { //recebe dados do cliente
+		if(entrada.hasNextLine()) { //se houver dados a receber 
+			return entrada.nextLine(); // recebe e retorna
+		}
+		return "#"; //se nao, retorna um sinal de que nao há dados.
+	}
 	
 }
