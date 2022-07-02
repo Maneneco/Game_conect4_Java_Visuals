@@ -20,7 +20,7 @@ import multiplayer.Jogador;
 
 public class MainSceneController {
 
-	
+	//teste
 	@FXML
 	public void initialize() { //inicializa os dados da cena principal
 
