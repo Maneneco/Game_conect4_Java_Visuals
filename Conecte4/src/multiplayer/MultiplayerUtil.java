@@ -26,7 +26,7 @@ public class MultiplayerUtil {	//utilitario de conexao
 			j2 = new Jogador(dados, -1, 0); //cria o jogador remoto
 			atual = j1; //o servidor inicia o jogo
 		} else {	//se o ip for valido
-			cliente = new Cliente(ip);  //cria um cliente conectado ao ip indicado
+			cliente = new Cliente(ip);  //cria um cliente ligado ao ip indicado
 			
 			
 			String dados=null; 
@@ -82,7 +82,7 @@ public class MultiplayerUtil {	//utilitario de conexao
 						}
 					}
 				}
-				if(servidor!=null) {	//ao sair do jogo, encerra o socket que estiver a ser utilizado
+				if(servidor!=null) {	//ao sair do jogo, encerra o socket que esta a ser utilizado
 					servidor.encerra();
 				} else {
 					cliente.encerra();

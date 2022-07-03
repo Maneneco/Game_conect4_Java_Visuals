@@ -13,18 +13,18 @@ public class Cliente {	//o socket do cliente
 	PrintStream saida; //e um de saida
 	
 	public Cliente(String ip) throws UnknownHostException, IOException {
-		client = new Socket(ip,4444);	//o socket se conecta ao ip passado via porta 4444 (conecte 4)
+		client = new Socket(ip,4444);	//o socket liga-se ao ip passado via porta 4444 (conecte 4)
 		
-		entrada = new Scanner(client.getInputStream());	//o buffer de entrada é criado usando a stream de entrada do socket recem criado
-		saida = new PrintStream(client.getOutputStream()); //o buffer de saida também do mesmo jeito.
+		entrada = new Scanner(client.getInputStream());	//o buffer de entrada é criado e usa a stream de entrada do socket recem criado
+		saida = new PrintStream(client.getOutputStream()); //o buffer de saida também da mesma maneira.
 	}
 	
-	public void enviarDados(String dados) {	//a funcao que envia dados via socket é bem simples: recebe os dados, e envia.
+	public void enviarDados(String dados) {	//recebe os dados, e envia.
 		saida.println(dados);
 	}
 	
 	public String recebeDados() { 	//para receber os dados
-		if(entrada.hasNextLine()) { //é verificado se há uma nova entrada de dados.
+		if(entrada.hasNextLine()) { //verifica se há uma nova entrada de dados.
 			return entrada.nextLine(); //se houver, retorna os dados.
 		}
 		return "#";	//se nao, retorna # como simbolo de que nao há nada.
