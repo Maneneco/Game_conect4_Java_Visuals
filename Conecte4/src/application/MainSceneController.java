@@ -94,16 +94,57 @@ public class MainSceneController {
 		reset();
 	}
 	
-	// Event Listener on Canvas[#canvasArea].onMouseClicked
+	/ Event Listener on Canvas[#canvasArea].onMouseClicked
 	@FXML
 	public void canvasMouseClicked(MouseEvent event) {	//quando há um clique
-		
+		if (game==null) return; //caso o game não tenha iniciado, nada é feito
+		game.setClick(event.getX(),event.getY()); //se nao, envia o clique ao jogo
 	}
 	
 	// Event Listener on Button.onAction
 	@FXML
 	public void buttonPlay(ActionEvent event) { // inicia o jogo
-		
+		if(username.getText().isEmpty()) return; // se nao houver um nome de usuario, nao inicia o jogo.
+		new Thread() { //cria uma thread para iniciar o jogo.
+			@Override
+			public void run() {	//funcao da thread
+				Image righton=null, 	//imagens a serem usadas para indicar a vez dos jogadores;
+						rightoff=null,
+						lefton=null,
+						leftoff=null;
+				try {
+					loginScreen.setVisible(false);	//esconde a tela de login
+					ipAdd.setVisible(true); //mostra o painel do endereco de ip.
+					multiplayer = new MultiplayerUtil(ipField.getText(),username.getText(),exited); //inicia o utilitario com o nome e o ip inseridos
+																									
+					Platform.runLater(new Runnable() { //executa esta função após o fim deste fluxo da thread
+						
+						@Override
+						public void run() {	//ao ser executado, guarda os nomes dos jogadores
+							nomeeste.setText(multiplayer.getEste().getName());
+							nomeoutro.setText(multiplayer.getAdv().getName());
+						}
+					});
+					
+					if (multiplayer.isServer()) {	//se for um servidor, o jogador local será o vermelho, e o remoto, o amarelo
+						estebutton.setImage(new Image(new FileInputStream("res/rbutton.png")));
+						outrobutton.setImage(new Image(new FileInputStream("res/ybutton.png")));
+					} else {						//se for cliente, o contrario
+						estebutton.setImage(new Image(new FileInputStream("res/ybutton.png")));
+						outrobutton.setImage(new Image(new FileInputStream("res/rbutton.png")));
+					}
+													//carrega as imagens das lampadas indicadoras de ordem de jogo 
+					righton = new Image(new FileInputStream("res/righton.png"));
+					rightoff = new Image(new FileInputStream("res/rightoff.png"));
+					lefton = new Image(new FileInputStream("res/lefton.png"));
+					leftoff = new Image(new FileInputStream("res/leftoff.png"));
+					ipAdd.setVisible(false);	//esconde o painel de login
+					canvasAnchor.setVisible(true); //mostra o canvas na tela
+				} catch (Exception e) {
+					error.setVisible(true); //em caso de erro, é mostrado o painel de erro
+					loginScreen.setVisible(false);	//a tela de login some
+					erroTXT.setText(e.getMessage()); //e o erro é mostrado
+				}
 	}
 	// Event Listener on Button.onAction
 	@FXML
