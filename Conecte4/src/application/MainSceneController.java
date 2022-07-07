@@ -255,6 +255,7 @@ public class MainSceneController {
 							finished = true;
 						}
 
+						//teste
 						if(game.verificaEmpate()) {	//se houve empate
 							long stop = System.currentTimeMillis();
 							long secs = (stop-start)/1000;
