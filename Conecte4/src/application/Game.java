@@ -116,14 +116,14 @@ public class Game extends Thread{	//o jogo extende a thread, para que possa cont
 			else if(coins[last[0]-x][last[1]]==null) break;	//se achar outra moeda numa distancia de até 3 moeda, não é possivel que tenha vencido, logo sai do loop.
 			else if (coins[last[0]-x][last[1]].getJogador()==multiplayer.getEste()) {
 				 count++;
-			}
+			}else break;
 		}
 		for(int x=1;x<4;x++) {	//faz a mesma coisa para o outro lado.
 			if(last[0]+x>=cols) break;
 			else if(coins[last[0]+x][last[1]]==null) break;
 			else if (coins[last[0]+x][last[1]].getJogador()==multiplayer.getEste()){
 				 count++;
-			}
+			}else break;
 		}
 		if(count == 4) return multiplayer.getEste();	//se o contador chega a 4. o jogador local venceu, e é retornado.
 		
@@ -134,14 +134,14 @@ public class Game extends Thread{	//o jogo extende a thread, para que possa cont
 			else if(coins[last[0]][last[1]-y]==null) break;
 			else if (coins[last[0]][last[1]-y].getJogador()==multiplayer.getEste()){
 				 count++;
-			}
+			}else break;
 		}
 		for(int y=1;y<4;y++) {
 			if(last[1]+y>=lins) break;
 			else if(coins[last[0]][last[1]+y]==null) break;
 			else if (coins[last[0]][last[1]+y].getJogador()==multiplayer.getEste()){
 				 count++;
-			}
+			}else break;
 		}
 		if(count == 4) return multiplayer.getEste();
 		
@@ -152,14 +152,14 @@ public class Game extends Thread{	//o jogo extende a thread, para que possa cont
 			else if(coins[last[0]-xy][last[1]-xy]==null) break;
 			else if (coins[last[0]-xy][last[1]-xy].getJogador()==multiplayer.getEste()){
 				 count++;
-			}
+			}else break;
 		}
 		for(int xy=1;xy<4;xy++) {
 			if(last[0]+xy>=cols||last[1]+xy>=lins) break;
 			else if(coins[last[0]+xy][last[1]+xy]==null) break;
 			else if (coins[last[0]+xy][last[1]+xy].getJogador()==multiplayer.getEste()){
 				 count++;
-			}
+			}else break;
 		}
 		if(count == 4) return multiplayer.getEste();
 		
@@ -170,17 +170,18 @@ public class Game extends Thread{	//o jogo extende a thread, para que possa cont
 			else if(coins[last[0]-xy][last[1]+xy]==null) break;
 			else if (coins[last[0]-xy][last[1]+xy].getJogador()==multiplayer.getEste()){
 				 count++;
-			}
+			}else break;
 		}
 		for(int xy=1;xy<4;xy++) {
 			if(last[0]+xy>=cols||last[1]-xy<0) break;
 			else if(coins[last[0]+xy][last[1]-xy]==null) break;
 			else if (coins[last[0]+xy][last[1]-xy].getJogador()==multiplayer.getEste()){
 				 count++;
-			}
+			}else break;
 		}
 		if(count == 4) return multiplayer.getEste();
 		
+				
 		return null;
 	}
 
